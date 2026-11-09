@@ -32,10 +32,10 @@ def generate_video(message):
         "Content-Type": "application/json"
     }
     
-    # API Payload (Prompt bhejna)
+        # API Payload (Prompt bhejna)
     payload = {
         "prompt": prompt,
-        # Agar OpenRouter kisi specific model ka naam mangta hai, to yahan daalna padega e.g., "model": "luma/dream-machine"
+        "model": "luma/dream-machine" 
     }
     
     try:
