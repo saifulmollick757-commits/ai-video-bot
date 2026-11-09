@@ -1,0 +1,29 @@
+name: AI Video Bot Runner
+
+on:
+  schedule:
+    # GitHub Actions ek script ko maximum 6 ghante chalne deta hai. 
+    # Hum isko har 5 ghante me restart karenge taaki bot kabhi band na ho.
+    - cron: '0 */5 * * *'
+  workflow_dispatch: # Manual start button
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Install Requirements
+        run: pip install -r requirements.txt
+        
+      - name: Run Telegram Bot
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: python bot.py
